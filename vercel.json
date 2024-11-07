@@ -4,6 +4,9 @@
     {
       "src": "main.js",
       "use": "@vercel/node"
+      "config": {
+      	"packageManager": "npm"
+      }
     }
   ],
   "routes": [
