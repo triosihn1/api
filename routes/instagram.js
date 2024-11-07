@@ -4,7 +4,9 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const router = express.Router();
 const cors = require('cors');
+const cloudscraper = require('cloudflare-scraper');
 router.use(cors());
+
 let creator = '@triosihn';
 let api_fastdl = 'https://fastdl.app/api/';
 let api_stealthgram = 'https://stealthgram.com/api/apiData';
@@ -133,38 +135,35 @@ router.get('/highlightStories/:id', async (req, res) => {
 })
 
 router.get('/post/:id', async (req, res) => {
-	try{
-		const id_params = req.params.id;
-		if (!id_params) return res.json({status: false, creator: creator, message: 'Check your id..'});
-		let data = JSON.stringify({
-			"body": {
-				"id": id_params,
-				"count" : 50,
-				"max_id" : null,
-				"userName" : 'triosihn'
-			},
-			"url": "user/get_media"
-		});
-		
-		let config = {
-			method: 'post',
-			maxBodyLength: Infinity,
-			url : api_stealthgram,
-			headers: { 
-				'Content-Type': 'application/json'
-			},
-			data : data
-		};
-		
-		axios.request(config)
-		.then((response) => {
-			console.log(JSON.stringify(response.data));
-		}).catch((error) => {
-			console.log(error);
-		})
-	}catch(e){
-		res.json({ status: false, creator: creator, message: e.message });
-	}
+  try {
+    const id_params = req.params.id;
+    if (!id_params) return res.json({ status: false, creator: creator, message: 'Check your id..' });
+
+    let data = {
+      "body": {
+        "id": 59238751652,
+        "count": 50,
+        "max_id": null,
+        "userName": "triosihn"
+      },
+      "url": "user/get_media"
+    };
+
+    const options = {
+      method: 'POST',
+      url: api_stealthgram,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    const response = await cloudscraper(options);
+    res.json(JSON.parse(response));
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ status: false, creator: creator, message: error.message });
+  }
 });
 
 router.get('/reels/:id', async (req, res) => {
