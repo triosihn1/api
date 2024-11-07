@@ -1,0 +1,33 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "This Free Api key",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triosihn1/api.git"
+  },
+  "keywords": [
+    "Api",
+    "free",
+    "api",
+    "key"
+  ],
+  "author": "triosihn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/triosihn1/api/issues"
+  },
+  "homepage": "https://github.com/triosihn1/api#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "node-fetch": "^3.3.2",
+    "ssl-express-www": "^3.2.1"
+  }
+}
